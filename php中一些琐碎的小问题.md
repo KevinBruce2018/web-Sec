@@ -32,3 +32,8 @@ https://cloud.tencent.com/info/8ceed38d46829f15abfea34a9b82a7ff.html
 sha1函数不能加密数组，返回值为false。
 
 该特性经常被用于一些绕过之中。
+
+#### urldecode
+当一个url被访问的时候，php会先将url进行url解码一次。使用的方法可参考如下博文。
+
+>https://www.cnblogs.com/xccjmpc/p/3348710.html
