@@ -27,3 +27,8 @@ $a = '$b $c';
 https://blog.csdn.net/Auuuuuuuu/article/details/88778852
 
 https://cloud.tencent.com/info/8ceed38d46829f15abfea34a9b82a7ff.html 
+
+#### sha1函数
+sha1函数不能加密数组，返回值为false。
+
+该特性经常被用于一些绕过之中。
