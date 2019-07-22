@@ -34,7 +34,7 @@ http://ctf5.shiyanbar.com/web/false.php?name[]=name&password[]=pass
 ```
 
 #### 拓展内容
-关于php中的等号
+1.关于php中的等号
 
 两个=是进行比较，但是只比较值而不会比较数据的类型。如果两个数据的类型不一样的话，会先转换成一样的。
 ```php
@@ -59,4 +59,8 @@ http://ctf5.shiyanbar.com/web/false.php?name[]=name&password[]=pass
 #该例子打印的结果为flase，因为两个比较的变量的类型不同
 ?>
 ```
+2.md5同样不支持加密数组，数组作为参数同样会返回false。
 
+3.sha1也有一些错误比较的漏洞可以利用。详情可以参考如下博文。
+
+>https://blog.csdn.net/cyyAray/article/details/78340241
