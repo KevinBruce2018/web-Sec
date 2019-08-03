@@ -9,6 +9,7 @@ if($_POST[user] && $_POST[pass]) {
     $pass = md5($_POST[pass]);
 
     $sql = "select pw from php where user='$user'";
+    #使用union时，查询出来的列名是第一个被查询的表对应的列名
     $query = mysql_query($sql);
     if (!$query) {
         printf("Error: %s\n", mysql_error($conn));
@@ -92,3 +93,74 @@ with rollup
 
 limit宇offset
 >https://blog.csdn.net/l1212xiao/article/details/80520330
+
+#### 例题3
+>http://ctf5.shiyanbar.com/web/houtai/ffifdyop.php,后台登录
+
+#### 代码
+
+```php
+$password=$_POST['password'];
+$sql = "SELECT * FROM admin WHERE username = 'admin' and password = '".md5($password,true)."'";
+$result=mysqli_query($link,$sql);
+if(mysqli_num_rows($result)>0){
+    echo 'flag is :'.$flag;
+}
+else{
+    echo '密码错误!';
+}
+```
+
+#### 分析
+该文件只接收一个password参数。如果想得到flag，必须保证密码的MD5值和用户输入的MD5值相同。值得注意的是，该处的MD5函数与常规的用法不太一致，其第二个参数为true，表示返回16字节的原始二进制格式的内容，而不是其对应的一个32位的数字字符串。
+
+因此，如果产生的二进制内容在显示为字符串时，如果能出现'or'axx（a为一个非0的数字，x为任意字符）,则可以构造一个恒为真的SQL语句。
+
+比较巧的是，该文件的文件名经过加密后正好可以产生一个比较合适的字符串。
+```txt
+'or'6�]��!r,��b
+```
+#### payload
+
+```txt
+password=ffifdyop
+```
+#### SQL注入常用函数
+
+1.database()
+
+该函数可以显示当前正在使用的数据库库名。
+
+2.mid()
+
+该函数可以从指定的字段中提取出字段的内容。
+
+mid(column_name,start[,length])
+```sql
+select mid(name,1) from user;
+/*start要求最小从1开始*/
+/*从password这一列的每一个元素的第一个字符开始截取*/
+/*注意得到的是整整一列的内容*/
+```
+eg:
+
+select * from user;
+| name | password |
+| ------ | ------ |
+| admin | admin |
+| root | root |
+
+select mid(name,1,2);
+
+|name|
+|---|
+|ad|
+|ro|
+
+3.ord()
+
+该函数用于获得某个字符串最开始的字符的ASCII值。
+
+4.ascii()
+
+目前未发现与ord的不同。
