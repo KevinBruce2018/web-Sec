@@ -186,6 +186,7 @@ select mid(name,1) from user;
 eg:
 
 select * from user;
+
 | name | password |
 | ------ | ------ |
 | admin | admin |
