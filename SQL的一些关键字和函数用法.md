@@ -108,3 +108,12 @@ select concat(user,' ',host)contest from user where host='localhost';
 | stone localhost     |
 | temp localhost      |
 
+7.updatexml()
+
+这个还不太会用，先抛出一个例子，主要是利用其报错把查询的结果给显示出来。
+
+如果关了回显的话就不要用这个了。
+
+select updatexml(1,concat(0x7e,version(),0x7e),1);
+
+第二个参数由于不符合xpath的规范，会报错，但是报错的时候会把整个字符串的结果报出来，因为假设查询了flag，错误回显中会出现flag。
