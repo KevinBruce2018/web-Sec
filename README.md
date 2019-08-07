@@ -3,4 +3,4 @@
 
 如果发现了我的错误，欢迎大家指正。
 
-联系方式:kevin_bruce@foxmail.com
+联系方式:kevinbruce996@gmail.com
