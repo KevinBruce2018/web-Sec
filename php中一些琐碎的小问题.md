@@ -15,6 +15,10 @@ $c = "a";
 $a = '$b $c';
 //打印结果为：$b $c
 ```
+### PHP源码文件
+
+有时候源码会写在后缀为phps的文件里，比较坑。
+>https://zhidao.baidu.com/question/43693848.html
 
 #### get_defined_vars()
 该函数会返回一个数组，里面包含当前所有已经定义的服务器变量，环境变量和用户变量。
