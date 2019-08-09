@@ -41,3 +41,26 @@ sha1函数不能加密数组，返回值为false。
 当一个url被访问的时候，php会先将url进行url解码一次。使用的方法可参考如下博文。
 
 >https://www.cnblogs.com/xccjmpc/p/3348710.html
+
+#### php数组
+PHP的数组之间可以互相合并，可以使用+运算符，或者array_merge()函数进行合并。但是二者的效果是不一样的。
+
+对于array_merge()函数，如果输入的数组中有相同的字符串键名，则该键名后面的值将覆盖前一个值。然而，如果数组包含数字键名，后面的值将不会覆盖原来的值，而是附加到后面。
+
+对于+，则是+左边的参数可以覆盖+右边的参数。
+```php
+<?php
+
+$a = array("cat","dog");
+$b = array("flag","fff","test");
+var_dump($a+$b);
+echo "<br>";
+$c = array_merge($a,$b);
+var_dump($c);
+?>
+```
+结果
+```txt
+array(3) { [0]=> string(3) "cat" [1]=> string(3) "dog" [2]=> string(4) "test" } 
+array(5) { [0]=> string(3) "cat" [1]=> string(3) "dog" [2]=> string(4) "flag" [3]=> string(3) "fff" [4]=> string(4) "test" }
+```
