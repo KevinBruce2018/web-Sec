@@ -120,3 +120,11 @@ select concat('aaa','kkk',NULL);
 select updatexml(1,concat(0x7e,version(),0x7e),1);
 
 第二个参数由于不符合xpath的规范，会报错，但是报错的时候会把整个字符串的结果报出来，因为假设查询了flag，错误回显中会出现flag。
+
+8.left()
+
+该函数是一个字符串处理函数，用法实例:
+
+select left('2019',2);
+
+返回的结果为：20。
