@@ -50,10 +50,13 @@ elt(n,str1,str2,str3)
 该函数用于选取参数中第n个字符串，如果n是1，则结果是str1。但是如果是0，后面的参数不管是需要执行一个函数，或者直接是一个字符串，都不会执行，直接返回NULL。这个特性非常重要，接下来将借助该函数进行延时注入。下面将给出例子。
 
 表结构
+
 ![表结构](https://markdown-1255584210.cos.ap-chengdu.myqcloud.com/sql_inject/users_table.png)
 正常使用时
+
 ![正常使用](https://markdown-1255584210.cos.ap-chengdu.myqcloud.com/sql_inject/elt.png)
 时间注入
+
 ![时间注入](https://markdown-1255584210.cos.ap-chengdu.myqcloud.com/sql_inject/timeinject.png)
 第一个延时了，第二个直接返回NULL而没有延时。
 
