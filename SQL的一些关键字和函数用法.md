@@ -92,7 +92,7 @@ limit后面的参数总是限定显示多少条，明白这一点就不会错了
 
 6.concat()
 
-可以将多个字符串连接起来，参数个数无限。
+可以将多个字符串连接起来，参数个数无限。但是唯一需要注意的地方就是，如果有一个参数的值是NULL，那么整行结果就会返回一个NULL。
 
 举个例子
 ```sql
@@ -107,6 +107,9 @@ select concat(user,' ',host)contest from user where host='localhost';
 | root localhost      |
 | stone localhost     |
 | temp localhost      |
+
+select concat('aaa','kkk',NULL);
+结果是NULL。
 
 7.updatexml()
 
