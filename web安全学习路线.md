@@ -32,7 +32,8 @@
 2. 会使用中国菜刀连接webshell
 3. 会用御剑，dirsearch等目录爆破工具
 4. 会用githack还原源码
-5. 待补充
+5. 会用nmap和sqlmap
+6. 待补充
 
 #### 漏洞学习
 1. SQL注入
