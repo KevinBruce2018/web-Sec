@@ -148,7 +148,7 @@ if (isset($fetch) && $fetch->num_rows>0){
 ![余下flag](https://markdown-1255584210.cos.ap-chengdu.myqcloud.com/day1web1/givemoney.png)
 
 接着修改地址，地址修改为所构造的payload。修改之后再次修改，将地址设置为随便一个正常值，比如1，这样就能看到报错页面。
-![余下flag](https://markdown-1255584210.cos.ap-chengdu.myqcloud.com/day1web1/change.png)
+![修改地址](https://markdown-1255584210.cos.ap-chengdu.myqcloud.com/day1web1/change.png)
 
 如果想要使用新的payload，只需要删除订单在重复以上操作即可。
-![余下flag](https://markdown-1255584210.cos.ap-chengdu.myqcloud.com/day1web1/delete.png)
+![删除订单](https://markdown-1255584210.cos.ap-chengdu.myqcloud.com/day1web1/delete.png)
