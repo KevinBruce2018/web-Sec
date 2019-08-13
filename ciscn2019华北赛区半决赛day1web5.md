@@ -109,7 +109,7 @@ if(!empty($_POST["user_name"]) && !empty($_POST["phone"]))
 
 分析代码可以知道，每个涉及查询的界面都过滤了很多东西来防止SQL注入，而且过滤的内容非常广泛，很难进行注入。
 
-但是尽管username和phone过滤非常严格，而address却只是进行了简单的转义。进过分析便找到了可以利用的地方。这里提取了一些change.php中和address相关的部分。
+但是尽管username和phone过滤非常严格，而address却只是进行了简单的转义。经过分析便找到了可以利用的地方。这里提取了一些change.php中和address相关的部分。
 ```php
 $address = addslashes($_POST["address"]);
 if (isset($fetch) && $fetch->num_rows>0){
