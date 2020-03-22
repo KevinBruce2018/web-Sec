@@ -13,31 +13,39 @@ select mid(name,1) from user;
 /*从password这一列的每一个元素的第一个字符开始截取*/
 /*注意得到的是整整一列的内容*/
 ```
-eg:
+举例:
 
+```mysql
 select * from user;
+```
 
 | name | password |
 | ------ | ------ |
 | admin | admin |
 | root | root |
 
+```mysql
 select mid(name,1,2);
+```
 
 |name|
 |---|
 |ad|
 |ro|
 
-3.ord()
+3.substr()
+
+这个函数很常用，有三个参数，按顺序分别是字符串，起始位置和长度。可以求指定字符串的子串。当然，第一个参数可以是列的名字。这个函数似乎和mid没有什么不同，如果mid或者substr中的某一个函数被禁了就用另一个。
+
+4.ord()
 
 该函数用于获得某个字符串最开始的字符的ASCII值。
 
-4.ascii()
+5.ascii()
 
-目前未发现与ord的不同。不过这样也有很大好处，那就是，如果SQL注入的题目中过滤了or，ord函数会躺枪，可以用ASCII函数替代。
+目前未发现与ord的不同。不过这样也有很大好处，那就是，如果SQL注入的题目中过滤了or，ord函数会躺枪，可以用ascii函数替代。
 
-5.limit和offset
+6.limit和offset
 
 limit和offset均用于限制查询结果显示的行数。
 
@@ -90,7 +98,7 @@ limit后面的参数总是限定显示多少条，明白这一点就不会错了
 */
 ```
 
-6.concat()
+7.concat()
 
 可以将多个字符串连接起来，参数个数无限。但是唯一需要注意的地方就是，如果有一个参数的值是NULL，那么整行结果就会返回一个NULL。
 
@@ -108,28 +116,67 @@ select concat(user,' ',host)contest from user where host='localhost';
 | stone localhost     |
 | temp localhost      |
 
+```mysql
 select concat('aaa','kkk',NULL);
+```
+
 结果是NULL。
 
-7.updatexml()
+8.group_concat()
 
-这个还不太会用，先抛出一个例子，主要是利用其报错把查询的结果给显示出来。
+该函数可以将查询结果连成一行，如果只查询一列，默认用逗号分隔；如果查询多列，每一行的查询结果会直接进行字符串连接，行之间默认用逗号分隔。需要注意的是，用于分隔的默认字符可以修改。
 
-如果关了回显的话就不要用这个了。
+举个例子：
 
+```mysql
+select group_concat(username,password)result from users;
+```
+
+|result               |
+|---------------------|
+|admin21232f297a57a5a743894a0e4a801fc3,testc4ca4238a0b923820dcc509a6f75849b|
+
+9.updatexml()
+
+这个主要是填写错误的xpath参数使查询报错，报错时会把xpath位置的查询结果暴露出来。
+
+如果关了回显的话就不要用这个了，可以考虑时间注入。
+
+用法举例
+
+```mysql
 select updatexml(1,concat(0x7e,version(),0x7e),1);
+```
 
-第二个参数由于不符合xpath的规范，会报错，但是报错的时候会把整个字符串的结果报出来，因为假设查询了flag，错误回显中会出现flag。
+第二个参数由于不符合xpath的规范，会报错。报错的时候会把version()执行的结果报出来，假设查询了flag，错误回显中会出现flag。
 
-8.left()
+```txt
+ERROR 1105 (HY000): XPATH syntax error: '~5.7.17~'
+```
+
+10.left()
 
 该函数是一个字符串处理函数，用法实例:
 
+```mysql
 select left('2019',2);
+```
 
 返回的结果为：20。
 
-9.elt()函数
+11.right()
+
+这个和left对比着记，用法实例：
+
+```mysql
+select right('2019',2)
+```
+
+返回的结果为：19。
+
+很明显，substr完全可以取代left和right两个函数，但是如果substr和mid被禁了，left和right就可以结合着用。
+
+12.elt()函数
 
 elt(n,str1,str2,str3);
 
@@ -137,17 +184,14 @@ elt(n,str1,str2,str3);
 
 比如：
 
+```mysql
 select elt(2，'888','666');
+```
 
 其返回的结果是666。
 
 如果第一个参数是0，则返回NULL。并且如果第一个参数是0，后面无论是什么，都不会考虑了，如果是函数，则不会运行了。
 
+13.sleep()
 
-10.sleep()
-
-该函数的参数是一个整数t，可以在执行某操作后延迟t秒而不进行任何操作。
-
-11.substr()
-
-这个函数很常用，有三个参数，按顺序分别是字符串，起始位置和长度。可以求指定字符串的子串。当然，第一个参数可以是列的名字。
+该函数的参数是一个整数t，可以在执行某操作后延迟t秒而不进行任何操作。该函数常用于处理没有回显的SQL注入，根据响应的时间来确定被注入的SQL语句是否执行成功了。
