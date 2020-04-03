@@ -217,3 +217,6 @@ select rand();
 16.floor()
 
 该函数用于将一个浮点数向下取整得到整数，可以与rand函数配合使用。在特定情况下，rand、floor、count(*)配合group by可以进行报错注入。
+
+>关于rand、floor、count(*)和group by进行报错注入的方法几原理，可以参考以下文章：
+https://www.2cto.com/article/201604/498394.html
