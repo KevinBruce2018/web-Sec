@@ -234,3 +234,13 @@ DOUBLE value is out of range in 'exp(~((select 'root@localhost' from dual)))'
 ```
 
 有一个需要注意的点就是版本问题，并不是所有的版本都可用。
+
+18.hex()
+
+这个函数主要用于获取字符串对应的十六进制值。用法如下：
+
+```mysql
+select hex('users');
+```
+
+得到的结果为：7573657273。
