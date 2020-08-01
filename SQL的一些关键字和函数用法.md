@@ -208,7 +208,7 @@ select length('test');
 
 15.rand()
 
-该函数用于产生一个随机数，可以接受一个参数作为种子，也可以直接
+该函数用于产生一个随机数，可以接受一个参数作为种子，也可以直接使用。
 
 ```mysql
 select rand();
@@ -244,3 +244,16 @@ select hex('users');
 ```
 
 得到的结果为：7573657273。
+
+19.order by
+
+order by是mysql中对查询数据进行排序的方法，后面可以跟列名或者列号（数字），两种写法等价。在sql注入中，该关键字经常被用来测试一个表中有多少列，（union select 1,1,1,1,……也可以用来测试有多少列。）也有一些其它骚操作可以玩。可以参考如下博客来涨一些姿势：https://yang1k.github.io/post/sql%E6%B3%A8%E5%85%A5%E4%B9%8Border-by%E6%B3%A8%E5%85%A5/
+
+用法：
+
+```mysql
+select * from users order by 1;
+select * from users order by username; 
+```
+
+order by在特殊情况下可以绕过预编译，这里先挖个坑，以后补。
