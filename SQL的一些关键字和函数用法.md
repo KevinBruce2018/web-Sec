@@ -256,4 +256,4 @@ select * from users order by 1;
 select * from users order by username; 
 ```
 
-order by在特殊情况下可以绕过预编译，这里先挖个坑，以后补。
+order by在特殊情况下可以绕过预编译，因为order by如果后面填写内容的话，只能跟列名或者列号。注意列名和字符串完全是两码事，字符串是带引号的，而列名是没有的。所以如果order by后面需要拼接用户输入的内容，那就可以进行操作，比如order by 1^(ord(length(database())>10)),会导致溢出从而可能出现报错。
